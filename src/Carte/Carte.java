@@ -10,7 +10,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Carte {
-    //private final int id;
+    private final int id;
     private final Image img;
     private final List<Mur> murs = new ArrayList<>();
     
