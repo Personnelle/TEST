@@ -1,0 +1,4 @@
+rq.request("CREATE TABLE CARTE(ID NUMBER, IMG VARCHAR2(50), CONSTRAINT PK_CARTE PRIMARY KEY (ID));");
+
+        rq.request("INSERT INTO CARTE VALUES(0, 'ressources/images/carteVillage.png');");
+        rq.request("INSERT INTO CARTE VALUES(1, 'ressources/images/carte1.png');");
