@@ -1,8 +1,10 @@
 package Projectiles;
 
 import BDD.Requete;
+import Carte.Mur;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.Graphics;
@@ -22,11 +24,8 @@ public class Projectile {
     private boolean active;
     private float speed;
 
-    public Projectile(int idArme, float x, float y, Vecteur v) {
+    public Projectile(int idArme, float x, float y, Vecteur v, int bonusDegat) {
         this.idArme = idArme;
-        this.x = x;
-        this.y = y;
-        this.v = v;
         active = true;
         
         try {
@@ -44,6 +43,30 @@ public class Projectile {
             rq.closeDB();
         } catch (ClassNotFoundException | SQLException | SlickException ex) {
             Logger.getLogger(Projectile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.v = v;
+        if (v.getCoefX() < 0) {
+            if (Math.abs(v.getCoefX()) < Math.abs(v.getCoefY())) {
+                this.x = x - img.getWidth() / 2;
+                if (v.getCoefY() > 0) this.y = y;
+                else this.y = y - img.getHeight();
+            }
+            else {
+                this.x = x - img.getWidth();
+                this.y = y - img.getHeight() / 2;
+            }
+        }
+        else {
+            if (Math.abs(v.getCoefX()) < Math.abs(v.getCoefY())) {
+                this.x = x - img.getWidth() / 2;
+                if (v.getCoefY() > 0) this.y = y;
+                else this.y = y - img.getHeight();
+            }
+            else {
+                this.x = x;
+                this.y = y - img.getHeight() / 2;
+            }
         }
     }
 
@@ -64,10 +87,22 @@ public class Projectile {
         if (isActive()) g.drawImage(img, x, y);
     }
     
-    public void deplacer() {
+    public void deplacer(List<Mur> murs) {
         x += v.getCoefX() * speed;
         y += v.getCoefY() * speed;
         range -= speed;
         if (range <= 0) active = false;
+        testCollision(murs);
+    }
+    
+    public void testCollision(List<Mur> murs) {
+        if (!perforant) {
+            boolean b = false;
+            for (Mur m : murs) {
+                if (getX() < m.getX1() && getX1() > m.getX() && getY() < m.getY1() && getY1() > m.getY())
+                    b = true;
+            }
+            if (b) active = false;
+        }
     }
 }

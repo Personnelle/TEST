@@ -46,7 +46,7 @@ public class SceneExte extends Scene {
         Input input = gc.getInput();
         
         perso.deplacer(input, c);
-        projPerso.deplacer();
+        projPerso.deplacer(c.getMurs());
         if (input.isKeyPressed(Input.KEY_V)) {
             perso.setX(Ctes.VILLAGE_X_STARTPERSO);
             perso.setY(Ctes.VILLAGE_Y_STARTPERSO);
@@ -56,7 +56,8 @@ public class SceneExte extends Scene {
         
         if (input.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON)) {
             int idArme = perso.tirer(input);
-            if (idArme != -1) projPerso.addProjectiles(idArme, input, perso.getX(), perso.getY());
+            if (idArme != -1) projPerso.addProjectiles(idArme, input, (perso.getX() + perso.getX1()) / 2, 
+                    (perso.getY() + perso.getY1()) / 2, perso.getStatsAct().getAtk());
         }
     }
     
@@ -66,5 +67,6 @@ public class SceneExte extends Scene {
         backVillage = new Image("ressources/carte/backVillage.png");
     }
     
+    @Override
     public Personnage getPerso() { return perso; }
 }

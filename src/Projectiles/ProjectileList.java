@@ -1,6 +1,7 @@
 package Projectiles;
 
 import BDD.Requete;
+import Carte.Mur;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class ProjectileList {
     
     public ProjectileList() {}
     
-    public void addProjectiles(int idArme, Input input, float x, float y) {
+    public void addProjectiles(int idArme, Input input, float x, float y, int bonusDegat) {
         Vecteur vBase = new Vecteur(x, y, input.getMouseX(), input.getMouseY());
         int nbProj = 1;
         float angleCouvert = 0;
@@ -31,16 +32,17 @@ public class ProjectileList {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProjectileList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        float angleFirstProj = vBase.getArgument() + angleCouvert/2;
+        System.out.println("Angle de base :"+vBase.getArgument());
+        float angleFirstProj = vBase.getArgument() - angleCouvert/2;
         if (angleFirstProj >= 360) angleFirstProj -= 360;
         else if (angleFirstProj < 0) angleFirstProj += 360;
+        System.out.println("Angle first proj :"+angleFirstProj);
         
         float angleEntreProj = 0;
         if (nbProj != 1) angleEntreProj = angleCouvert / (nbProj - 1);
         
         for (int i = 0 ; i < nbProj ; i++)
-            liste.add(new Projectile(idArme, x, y, new Vecteur(angleFirstProj + i * angleEntreProj)));
+            liste.add(new Projectile(idArme, x, y, new Vecteur(angleFirstProj + i * angleEntreProj), bonusDegat));
     }
 
     public List<Projectile> getListe() { return liste; }
@@ -59,8 +61,8 @@ public class ProjectileList {
         for (Projectile p : supp) liste.remove(p);
     }
     
-    public void deplacer() {
+    public void deplacer(List<Mur> murs) {
         suppProj();
-        for (Projectile p : liste) p.deplacer();
+        for (Projectile p : liste) p.deplacer(murs);
     }
 }
