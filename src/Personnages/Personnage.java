@@ -6,6 +6,7 @@ import Carte.Mur;
 import Constantes.Ctes;
 import Objets.Equipement;
 import Objets.Inventaire;
+import Objets.Objet;
 import Personnages.Statistique.ETATSTAT;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -242,5 +243,24 @@ public class Personnage {
             return inventaire.getObjetEquip().get(0).getId();
         }
         return -1;
+    }
+    
+    public void sauvegarde() throws ClassNotFoundException, SQLException {
+        Requete rq = new Requete();
+        
+        rq.request("DELETE FROM PERSONNAGE WHERE ID = " +getId()+ ";");
+        rq.request("INSERT INTO PERSONNAGE VALUES(" +getId()+ ", " +getIdClass()+ ", " +getNiveau()+ ", " +getXp()
+                + ", " +getFame()+ ", " +getStatsMaxAct().getHp()+ ", " +getStatsMaxAct().getMp()
+                + ", " +getStatsMaxAct().getAtk()+ ", " +getStatsMaxAct().getDef()+ ", " +getStatsMaxAct().getSpd()
+                + ", " +getStatsMaxAct().getDex()+ ", " +getStatsMaxAct().getVit()
+                + ", " +getStatsMaxAct().getWis()+ ");");
+        
+        rq.request("DELETE FROM INVENTAIRE WHERE IDPERSO = " +getId()+ ";");
+        for (Equipement e : getInventaire().getObjetEquip()) 
+            rq.request("INSERT INTO INVENTAIRE VALUES (" +getId()+ ", " +e.getId()+ ", 1);");
+        for (Objet o : getInventaire().getObjetInv()) 
+            rq.request("INSERT INTO INVENTAIRE VALUES (" +getId()+ ", " +o.getId()+ ", 0);");
+        
+        rq.closeDB();
     }
 }

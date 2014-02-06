@@ -68,6 +68,11 @@ public class SceneBank extends Scene {
         if (input.isKeyDown(Input.KEY_F)) {
             Main.Game.manager.getSence("Village").setState(STATE.ON);
             updateTable();
+            try {
+                perso.sauvegarde();
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(SceneBank.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Main.Game.manager.removeSence(this);
             Main.Game.manager.getSence("BarreInfo").setState(STATE.ON);
             gc.getInput().clearKeyPressedRecord();
@@ -106,6 +111,12 @@ public class SceneBank extends Scene {
                 input.getMouseY() > Ctes.BANK_Y_FERMER && input.getMouseY() < Ctes.BANK_Y_FERMER + fermer.getHeight()) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 Main.Game.manager.getSence("Village").setState(STATE.ON);
+                updateTable();
+                try {
+                    perso.sauvegarde();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(SceneBank.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Main.Game.manager.removeSence(this);
                 Main.Game.manager.getSence("BarreInfo").setState(STATE.ON);
                 gc.getInput().clearKeyPressedRecord();

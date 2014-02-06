@@ -134,21 +134,6 @@ public class SceneEchap extends Scene {
     }
     
     public void sauvegarde() throws ClassNotFoundException, SQLException {
-        Requete rq = new Requete();
-        
-        rq.request("DELETE FROM PERSONNAGE WHERE ID = " +perso.getId()+ ";");
-        rq.request("INSERT INTO PERSONNAGE VALUES(" +perso.getId()+ ", " +perso.getIdClass()+ ", " +perso.getNiveau()+ ", " +perso.getXp()
-                + ", " +perso.getFame()+ ", " +perso.getStatsMaxAct().getHp()+ ", " +perso.getStatsMaxAct().getMp()
-                + ", " +perso.getStatsMaxAct().getAtk()+ ", " +perso.getStatsMaxAct().getDef()+ ", " +perso.getStatsMaxAct().getSpd()
-                + ", " +perso.getStatsMaxAct().getDex()+ ", " +perso.getStatsMaxAct().getVit()
-                + ", " +perso.getStatsMaxAct().getWis()+ ");");
-        
-        rq.request("DELETE FROM INVENTAIRE WHERE IDPERSO = " +perso.getId()+ ";");
-        for (Equipement e : perso.getInventaire().getObjetEquip()) 
-            rq.request("INSERT INTO INVENTAIRE VALUES (" +perso.getId()+ ", " +e.getId()+ ", 1);");
-        for (Objet o : perso.getInventaire().getObjetInv()) 
-            rq.request("INSERT INTO INVENTAIRE VALUES (" +perso.getId()+ ", " +o.getId()+ ", 0);");
-        
-        rq.closeDB();
+        perso.sauvegarde();
     }
 }
