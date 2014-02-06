@@ -17,12 +17,9 @@ public class Equipement extends Objet implements Comparable<Equipement> {
     private int bonusDex;
     private int bonusVit;
     private int bonusWis;
-    private int bonusSortOuNbProj;
-    private int dureeSortOuAngle;
-    private int coutManaOuRange;
-    private int degatMin;
-    private int degatMax;
-    private boolean perforant;
+    private int bonusSort;
+    private int dureeSort;
+    private int coutMana;
     
     public Equipement(int id) throws ClassNotFoundException, SQLException, SlickException {
         super(id);
@@ -41,12 +38,9 @@ public class Equipement extends Objet implements Comparable<Equipement> {
         bonusDex = rs.getInt("BONUSDEX");
         bonusVit = rs.getInt("BONUSVIT");
         bonusWis = rs.getInt("BONUSWIS");
-        bonusSortOuNbProj = rs.getInt("BONUSSORTETNBPROJ");
-        dureeSortOuAngle = rs.getInt("DUREESORTETANGLE");
-        coutManaOuRange = rs.getInt("COUTMANAOURANGE");
-        degatMin = rs.getInt("DEGATMIN");
-        degatMax = rs.getInt("DEGATMAX");
-        perforant = rs.getInt("PERFORANT") == 1;
+        bonusSort = rs.getInt("BONUSSORT");
+        dureeSort = rs.getInt("DUREESORT");
+        coutMana = rs.getInt("COUTMANA");
         
         rq.closeDB();
     }
@@ -69,10 +63,7 @@ public class Equipement extends Objet implements Comparable<Equipement> {
     public int getBonusDex() { return bonusDex; }
     public int getBonusVit() { return bonusVit; }
     public int getBonusWis() { return bonusWis; }
-    public int getBonusSortOuNbProj() { return bonusSortOuNbProj; }
-    public int getDureeSortOuAngle() { return dureeSortOuAngle; }
-    public int getCoutManaOuRange() { return coutManaOuRange; }
-    public int getDegatMin() { return degatMin; }
-    public int getDegatMax() { return degatMax; }
-    public boolean isPerforant() { return perforant; }
+    public int getBonusSort() { return bonusSort; }
+    public int getDureeSort() { return dureeSort; }
+    public int getCoutMana() { return coutMana; }
 }

@@ -23,10 +23,10 @@ public class ProjectileList {
         
         try {
             Requete rq = new Requete();
-            ResultSet rs = rq.select("SELECT BONUSSORTETNBPROJ, DUREESORTETANGLE FROM OBJET WHERE ID = " +idArme+ ";");
+            ResultSet rs = rq.select("SELECT NBPROJ, ANGLE FROM PROJECTILE WHERE IDARME = " +idArme+ ";");
             
-            nbProj = rs.getInt("BONUSSORTETNBPROJ");
-            angleCouvert = rs.getFloat("DUREESORTETANGLE");
+            nbProj = rs.getInt("NBPROJ");
+            angleCouvert = rs.getFloat("ANGLE");
             
             rq.closeDB();
         } catch (ClassNotFoundException | SQLException ex) {

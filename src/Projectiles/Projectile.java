@@ -17,27 +17,50 @@ public class Projectile {
     private int degatMax;
     private int range;
     private boolean perforant;
+    private boolean truedamage;
     private float x;
     private float y;
     private Vecteur v;
     private Image img;
     private boolean active;
     private float speed;
+    
+    private int nbProj; //Use for infobulle
+    private float angle; //Use for infobulle
 
+    public Projectile(int idArme) {
+        try {
+            Requete rq = new Requete();
+            ResultSet rs = rq.select("SELECT * FROM PROJECTILE WHERE IDARME = " +idArme+ ";");
+            
+            degatMin = rs.getInt("DEGATMIN");
+            degatMax = rs.getInt("DEGATMAX");
+            range = rs.getInt("RANGE");
+            perforant = (rs.getInt("PERFORANT") == 1);
+            truedamage = (rs.getInt("TRUEDAMAGE") == 1);
+            nbProj = rs.getInt("NBPROJ");
+            angle = rs.getFloat("ANGLE");
+            rq.closeDB();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Projectile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public Projectile(int idArme, float x, float y, Vecteur v, int bonusDegat) {
         this.idArme = idArme;
         active = true;
         
         try {
             Requete rq = new Requete();
-            ResultSet rs = rq.select("SELECT * FROM OBJET WHERE ID = " +idArme+ ";");
+            ResultSet rs = rq.select("SELECT * FROM PROJECTILE WHERE IDARME = " +idArme+ ";");
             
             degatMin = rs.getInt("DEGATMIN");
             degatMax = rs.getInt("DEGATMAX");
-            range = rs.getInt("COUTMANAOURANGE");
+            range = rs.getInt("RANGE");
             perforant = (rs.getInt("PERFORANT") == 1);
-            img = new Image("ressources/projectiles/arme" +idArme+ ".png");
-            speed = rs.getFloat("SPEEDPROJ");
+            truedamage = (rs.getInt("TRUEDAMAGE") == 1);
+            img = new Image(rs.getString("IMG"));
+            speed = rs.getFloat("SPEED");
             img.setRotation(v.getArgument());
             
             rq.closeDB();
@@ -75,6 +98,7 @@ public class Projectile {
     public int getDegatMax() { return degatMax; }
     public int getRange() { return range; }
     public boolean isPerforant() { return perforant; }
+    public boolean isTrueDamage() { return truedamage; }
     public float getX() { return x; }
     public float getY() { return y; }
     public float getX1() { return x + img.getWidth(); }
@@ -82,6 +106,8 @@ public class Projectile {
     public Vecteur getV() { return v; }
     public Image getImg() { return img; }
     public boolean isActive() { return active; }
+    public int getNbProj() { return nbProj; }
+    public float getAngle() { return angle; }
     
     public void afficher(Graphics g) {
         if (isActive()) g.drawImage(img, x, y);

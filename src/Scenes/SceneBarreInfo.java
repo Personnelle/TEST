@@ -4,7 +4,7 @@ import Constantes.Ctes;
 import Objets.Equipement;
 import Objets.Objet;
 import Personnages.Personnage;
-import org.newdawn.slick.Color;
+import Projectiles.Projectile;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -331,20 +331,25 @@ public class SceneBarreInfo extends Scene {
         
         int i = 0;
         if (e.getType() == 1) {
-            String desc = "Projectile : " +e.getBonusSortOuNbProj();
-            if (e.isPerforant()) desc += " - Perforant";
+            Projectile p = new Projectile(e.getId());
+            String desc = "Projectile : " +p.getNbProj();
+            if (p.isPerforant()) desc += " - Perforant";
             g.drawString(desc, Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
             i++;
-            g.drawString("Angle de tir : " +e.getDureeSortOuAngle()+"°", Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
+            if (p.isTrueDamage()) {
+                g.drawString("Ignore défense adverse", Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
+                i++;
+            }
+            g.drawString("Angle de tir : " +p.getAngle()+"°", Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
             i++;
-            g.drawString("Portée : " +e.getCoutManaOuRange()+ "m", Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
+            g.drawString("Portée : " +p.getRange()+ "m", Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
             i++;
-            g.drawString("Dégâts : " +e.getDegatMin()+ " - " +e.getDegatMax(), Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
+            g.drawString("Dégâts : " +p.getDegatMin()+ " - " +p.getDegatMax(), Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
             i += 2;
         }
         else if (e.getType() == 4) {
-            int widthMana = g.getFont().getWidth(e.getCoutManaOuRange()+" MP");
-            g.drawString(e.getCoutManaOuRange()+" MP", Ctes.INFOBULLE_X_FOND + infoBulle.getWidth() - widthMana - 
+            int widthMana = g.getFont().getWidth(e.getCoutMana()+" MP");
+            g.drawString(e.getCoutMana()+" MP", Ctes.INFOBULLE_X_FOND + infoBulle.getWidth() - widthMana - 
                     (Ctes.INFOBULLE_X_NIVEAU - Ctes.INFOBULLE_X_FOND), Ctes.INFOBULLE_Y_NIVEAU);
             
             String desc = "Augmente votre ";
@@ -353,7 +358,7 @@ public class SceneBarreInfo extends Scene {
             else if (e.getIdClass() == 3) { desc += "attaque "; }
             else if (e.getIdClass() == 4) { desc += "régénération "; }
             desc = desc + "de"; 
-            String desc2 = e.getBonusSortOuNbProj() + " pendant " +e.getDureeSortOuAngle()+ " secondes.";
+            String desc2 = e.getBonusSort() + " pendant " +e.getDureeSort()+ " secondes.";
             g.drawString(desc, Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
             i++;
             g.drawString(desc2, Ctes.INFOBULLE_X_DESC, Ctes.INFOBULLE_Y_DESC + i * Ctes.INFOBULLE_ESP_LIGNES);
