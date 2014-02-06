@@ -41,29 +41,29 @@ public class ExecQuery {
         rq.request("CREATE TABLE OBJET(ID NUMBER, NIVEAU NUMBER, TYPE NUMBER, IDCLASS NUMBER, BONUSHP NUMBER, BONUSMP NUMBER, BONUSATK NUMBER, "
                 + "BONUSDEF NUMBER, BONUSSPD NUMBER, BONUSDEX NUMBER, BONUSVIT NUMBER, BONUSWIS NUMBER, IMG VARCHAR2(50), NOM VARCHAR2(50), "
                 + "BONUSSORTETNBPROJ NUMBER, DUREESORTETANGLE NUMBER, COUTMANAOURANGE NUMBER, DEGATMIN NUMBER, DEGATMAX NUMBER, "
-                + "PERFORANT NUMBER, DESC VARCHAR2(80), "
+                + "PERFORANT NUMBER, SPEEDPROJ NUMBER, DESC VARCHAR2(80), "
                 + "CONSTRAINT PK_EQUIPEMENT PRIMARY KEY (ID));");
-        rq.request("INSERT INTO OBJET VALUES(-1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'ressources/objets/potion_dex.png', 'Potion de Dextérité', 0, 0, 0, 0, 0, 0, 'Augmente de façon permanente votre dextérité.');");
-        rq.request("INSERT INTO OBJET VALUES(0, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(1, -1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(2, -1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(3, -1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(4, -1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(5, -1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(6, -1, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(7, -1, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(8, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(9, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(10, -1, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(11, -1, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(12, -1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(13, -1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(14, -1, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(15, -1, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(16, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/armes/epee_t0.png', 'Epée de débutant', 1, 0, 3, 10, 20, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(17, 0, 2, 1, 0, 0, 0, 2, 0, 0, 0, 0, 'ressources/equip/armures/lourde_t0.png', 'Armure de débutant', 0, 0, 0, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(18, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/armes/epee_t1.png', 'Epée en bois', 1, 0, 3, 15, 25, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(19, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/spell/shield_t1.png', 'Bouclier en bois', 2, 2, 70, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(-1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'ressources/objets/potion_dex.png', 'Potion de Dextérité', 0, 0, 0, 0, 0, 0, 0, 'Augmente de façon permanente votre dextérité.');");
+        rq.request("INSERT INTO OBJET VALUES(0, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(1, -1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(2, -1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(3, -1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(4, -1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(5, -1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(6, -1, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(7, -1, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(8, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(9, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(10, -1, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(11, -1, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(12, -1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(13, -1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(14, -1, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(15, -1, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(16, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/armes/epee_t0.png', 'Epée de débutant', 1, 0, 50, 10, 20, 0, 1, '');");
+        rq.request("INSERT INTO OBJET VALUES(17, 0, 2, 1, 0, 0, 0, 2, 0, 0, 0, 0, 'ressources/equip/armures/lourde_t0.png', 'Armure de débutant', 0, 0, 0, 0, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(18, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/armes/epee_t1.png', 'Epée en bois', 1, 0, 50, 15, 25, 0, 1, '');");
+        rq.request("INSERT INTO OBJET VALUES(19, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/spell/shield_t1.png', 'Bouclier en bois', 2, 2, 70, 0, 0, 0, 0, '');");
         
         rq.request("DROP TABLE INVENTAIRE;");
         rq.request("CREATE TABLE INVENTAIRE(IDPERSO NUMBER, IDOBJET NUMBER, EQUIPE NUMBER, "

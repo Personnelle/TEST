@@ -31,6 +31,7 @@ public class Personnage {
     private SpritePerso sprite;
     private Image img;
     private Inventaire inventaire;
+    private long lastTir = 0;
     
     public Personnage(int id, boolean nouveau) throws ClassNotFoundException, SQLException, SlickException {
         if (!nouveau) {
@@ -106,6 +107,7 @@ public class Personnage {
     public float getY1() { return y + img.getHeight(); }
     public Image getImg() { return img; }
     public Inventaire getInventaire() { return inventaire; }
+    public long lastTir() { return lastTir; }
 
     public void setX(float x) { this.x = x; }
     public void setY(float y) { this.y = y; }
@@ -232,7 +234,13 @@ public class Personnage {
             vie = statsAct.getHp();
     }
     
-    public void tirer(Input input) {
-        
+    public int tirer(Input input) {
+        //On suppose 1 + 0.dex tir par seconde (avec 50 dex => 1.5 tir par seconde)
+        //On aura donc 1000 ms / nbTirParSeconde milliseconde d'écart entre chaque tir
+        if ((System.currentTimeMillis() - lastTir) > (1000 / (1 + statsAct.getDex() / 100))) {
+            lastTir = System.currentTimeMillis();
+            return inventaire.getObjetEquip().get(0).getId();
+        }
+        return -1;
     }
 }

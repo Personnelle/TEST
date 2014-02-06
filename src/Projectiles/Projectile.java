@@ -20,6 +20,7 @@ public class Projectile {
     private Vecteur v;
     private Image img;
     private boolean active;
+    private float speed;
 
     public Projectile(int idArme, float x, float y, Vecteur v) {
         this.idArme = idArme;
@@ -37,6 +38,7 @@ public class Projectile {
             range = rs.getInt("COUTMANAOURANGE");
             perforant = (rs.getInt("PERFORANT") == 1);
             img = new Image("ressources/projectiles/arme" +idArme+ ".png");
+            speed = rs.getFloat("SPEEDPROJ");
             img.setRotation(v.getArgument());
             
             rq.closeDB();
@@ -60,5 +62,12 @@ public class Projectile {
     
     public void afficher(Graphics g) {
         if (isActive()) g.drawImage(img, x, y);
+    }
+    
+    public void deplacer() {
+        x += v.getCoefX() * speed;
+        y += v.getCoefY() * speed;
+        range -= speed;
+        if (range <= 0) active = false;
     }
 }

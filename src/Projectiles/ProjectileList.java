@@ -53,9 +53,14 @@ public class ProjectileList {
         List<Projectile> supp = new ArrayList<>();
         
         for (Projectile p : liste) {
-            if (p.isActive()) supp.add(p);
+            if (!p.isActive()) supp.add(p);
         }
         
         for (Projectile p : supp) liste.remove(p);
+    }
+    
+    public void deplacer() {
+        suppProj();
+        for (Projectile p : liste) p.deplacer();
     }
 }

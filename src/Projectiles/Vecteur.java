@@ -27,7 +27,7 @@ public class Vecteur {
             if (a < 0) angleRadian = Math.PI;
             else angleRadian = 0;
         }
-        else angleRadian *= -1;
+        else if (b < 0) angleRadian *= -1;
         float arg = (float) ((angleRadian * 360) / (2 * Math.PI));
         if (arg < 0) arg += 360;
         return arg;

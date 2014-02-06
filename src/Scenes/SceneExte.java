@@ -3,6 +3,7 @@ package Scenes;
 import Carte.Carte;
 import Constantes.Ctes;
 import Personnages.Personnage;
+import Projectiles.ProjectileList;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ public class SceneExte extends Scene {
     private Personnage perso;
     private Carte c;
     private Image backVillage;
+    private ProjectileList projPerso = new ProjectileList();
     
     public SceneExte(int idMap, Personnage p) {
         super();
@@ -35,6 +37,7 @@ public class SceneExte extends Scene {
     protected void CustomRender(GameContainer gc, Graphics g) throws SlickException {
         c.afficher(g);
         perso.afficher(g);
+        projPerso.afficher(g);
         g.drawImage(backVillage, Ctes.LARGEUR_ECRAN - backVillage.getWidth(), 0);
     }
     
@@ -43,6 +46,7 @@ public class SceneExte extends Scene {
         Input input = gc.getInput();
         
         perso.deplacer(input, c);
+        projPerso.deplacer();
         if (input.isKeyPressed(Input.KEY_V)) {
             perso.setX(Ctes.VILLAGE_X_STARTPERSO);
             perso.setY(Ctes.VILLAGE_Y_STARTPERSO);
@@ -50,8 +54,9 @@ public class SceneExte extends Scene {
             Main.Game.manager.removeSence(this);
         }
         
-        if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-            perso.tirer(input);
+        if (input.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON)) {
+            int idArme = perso.tirer(input);
+            if (idArme != -1) projPerso.addProjectiles(idArme, input, perso.getX(), perso.getY());
         }
     }
     
