@@ -92,6 +92,53 @@ public class Projectile {
             }
         }
     }
+    
+    public Projectile(int idMob, float x, float y, Vecteur v, int bonusDegat, boolean mob) {
+        this.idArme = idMob;
+        active = true;
+        
+        try {
+            Requete rq = new Requete();
+            ResultSet rs = rq.select("SELECT * FROM PROJECTILE WHERE IDMOB = " +idMob+ ";");
+            
+            degatMin = rs.getInt("DEGATMIN");
+            degatMax = rs.getInt("DEGATMAX");
+            range = rs.getInt("RANGE");
+            perforant = (rs.getInt("PERFORANT") == 1);
+            truedamage = (rs.getInt("TRUEDAMAGE") == 1);
+            img = new Image(rs.getString("IMG"));
+            speed = rs.getFloat("SPEED");
+            img.setRotation(v.getArgument());
+            
+            rq.closeDB();
+        } catch (ClassNotFoundException | SQLException | SlickException ex) {
+            Logger.getLogger(Projectile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.v = v;
+        if (v.getCoefX() < 0) {
+            if (Math.abs(v.getCoefX()) < Math.abs(v.getCoefY())) {
+                this.x = x - img.getWidth() / 2;
+                if (v.getCoefY() > 0) this.y = y;
+                else this.y = y - img.getHeight();
+            }
+            else {
+                this.x = x - img.getWidth();
+                this.y = y - img.getHeight() / 2;
+            }
+        }
+        else {
+            if (Math.abs(v.getCoefX()) < Math.abs(v.getCoefY())) {
+                this.x = x - img.getWidth() / 2;
+                if (v.getCoefY() > 0) this.y = y;
+                else this.y = y - img.getHeight();
+            }
+            else {
+                this.x = x;
+                this.y = y - img.getHeight() / 2;
+            }
+        }
+    }
 
     public int getIdArme() { return idArme; }
     public int getDegatMin() { return degatMin; }
