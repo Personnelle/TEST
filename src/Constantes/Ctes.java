@@ -153,4 +153,5 @@ public class Ctes {
     public static final int CARTE_X_LOOTOBJ = CARTE_X_CADRELOOT + 9;
     public static final int CARTE_Y_LOOTOBJ = CARTE_Y_CADRELOOT + 9;
     public static final int CARTE_ESP_LOOTOBJ = 42;
+    public static final int CARTE_TAILLE_CASELOOT = 38;
 }

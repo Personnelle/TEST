@@ -57,7 +57,7 @@ public class Inventaire {
         
         //A SUPPRIMER
         objetsInv.add(new Objet(-1));
-        objetsInv.add(new Equipement(19));
+        objetsInv.add(new Equipement(18));
         
         rq.closeDB();
     }

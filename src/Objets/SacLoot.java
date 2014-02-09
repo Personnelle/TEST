@@ -30,8 +30,11 @@ public class SacLoot {
             
             while (rs.next()) {
                 double rd = Math.random();
-                if (rd < rs.getDouble("POURCENT"))
-                    liste.add(new Objet(rs.getInt("IDOBJET")));
+                if (rd < rs.getDouble("POURCENT")) {
+                    if (rs.getInt("IDOBJET") >= 0)
+                        liste.add(new Equipement(rs.getInt("IDOBJET")));
+                    else liste.add(new Objet(rs.getInt("IDOBJET")));
+                }
             }
             
             rq.closeDB();

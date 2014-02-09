@@ -72,6 +72,7 @@ public class SceneExte extends Scene {
         
         projPerso.deplacer(c.getMurs());
         projPerso.collisionWithMob(mobliste.getListeMob());
+        mobliste.testLoot(input, perso);
         
         if (input.isKeyPressed(Input.KEY_V)) {
             perso.setX(Ctes.VILLAGE_X_STARTPERSO);
