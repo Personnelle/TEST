@@ -92,6 +92,9 @@ public class Statistique {
     public void addVit(int vit) {  this.vit += vit; }
     public void addWis(int wis) { this.wis += wis; }
     
+    public void setHp(int hp) { this.hp = hp; }
+    public void setMp(int mp) { this.mp = mp; }
+    
     public void calcul(Personnage p) {
         if (etat == ETATSTAT.ACT) {
             hp = p.calculHpAct();

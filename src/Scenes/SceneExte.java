@@ -1,6 +1,7 @@
 package Scenes;
 
 import Carte.Carte;
+import Carte.TeleporteurList;
 import Constantes.Ctes;
 import Monstre.MobList;
 import Personnages.Personnage;
@@ -22,13 +23,15 @@ public class SceneExte extends Scene {
     private ProjectileList projPerso = new ProjectileList();
     private MobList mobliste;
     private boolean fight;
+    private TeleporteurList telep;
     
     public SceneExte(int idMap, Personnage p) {
         super();
         try {
             setPriority(1);
             perso = p;
-            c = new Carte(0);
+            c = new Carte(idMap);
+            telep = new TeleporteurList(idMap);
         } catch (ClassNotFoundException | SQLException | SlickException ex) {
             Logger.getLogger(SceneExte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,6 +43,7 @@ public class SceneExte extends Scene {
     @Override
     protected void CustomRender(GameContainer gc, Graphics g) throws SlickException {
         c.afficher(g);
+        if (!fight) telep.affiche(g);
         g.drawImage(popMob, Ctes.CARTE_X_POPMOB, Ctes.CARTE_Y_POPMOB);
         perso.afficher(g);
         mobliste.afficher(g);
@@ -52,6 +56,13 @@ public class SceneExte extends Scene {
         Input input = gc.getInput();
         
         perso.deplacer(input, c);
+        int id = telep.collision(perso);
+        if (id != Ctes.NOMAP_VALUE) {
+            Main.Game.manager.addSence(new SceneExte(id, perso));
+            Main.Game.manager.removeSence(this);
+            Main.Game.manager.sort();
+        }
+        
         mobliste.deplacer(perso);
         if (perso.getVie() == 0) {
             perso.setVie(1);

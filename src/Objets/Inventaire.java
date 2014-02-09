@@ -55,10 +55,6 @@ public class Inventaire {
         }
         Collections.sort(objetsEquip);
         
-        //A SUPPRIMER
-        objetsInv.add(new Objet(-1));
-        objetsInv.add(new Equipement(18));
-        
         rq.closeDB();
     }
     

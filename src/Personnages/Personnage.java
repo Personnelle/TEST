@@ -36,6 +36,7 @@ public class Personnage {
     private Inventaire inventaire;
     private long lastTir = 0;
     private TextDegatList txtDegats = new TextDegatList();
+    private long lastRegen = 0;
     
     public Personnage(int id, boolean nouveau) throws ClassNotFoundException, SQLException, SlickException {
         if (!nouveau) {
@@ -121,6 +122,7 @@ public class Personnage {
     public void afficher(Graphics g) {
         g.drawImage(img, x, y);
         txtDegats.affiche(g);
+        regen();
     }
     
     public void deplacer(Input i, Carte c) {
@@ -294,5 +296,15 @@ public class Personnage {
             rq.request("INSERT INTO INVENTAIRE VALUES (" +getId()+ ", " +o.getId()+ ", 0);");
         
         rq.closeDB();
+    }
+    
+    public void regen() {
+        if (System.currentTimeMillis() - lastRegen > 5000) {
+            vie += statsAct.getVit() / 2;
+            if (vie > statsAct.getHp()) vie = statsAct.getHp();
+            mana += statsAct.getWis() / 2;
+            if (mana > statsAct.getMp()) mana = statsAct.getMp();
+            lastRegen = System.currentTimeMillis();
+        }
     }
 }

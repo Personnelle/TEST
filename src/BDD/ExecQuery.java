@@ -42,7 +42,14 @@ public class ExecQuery {
                 + "BONUSDEF NUMBER, BONUSSPD NUMBER, BONUSDEX NUMBER, BONUSVIT NUMBER, BONUSWIS NUMBER, IMG VARCHAR2(50), NOM VARCHAR2(50), "
                 + "BONUSSORT NUMBER, DUREESORT NUMBER, COUTMANA NUMBER, DESC VARCHAR2(80), "
                 + "CONSTRAINT PK_EQUIPEMENT PRIMARY KEY (ID));");
-        rq.request("INSERT INTO OBJET VALUES(-1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'ressources/objets/potion_dex.png', 'Potion de Dextérité', 0, 0, 0, 'Augmente de façon permanente votre dextérité.');");
+        rq.request("INSERT INTO OBJET VALUES(-8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 'ressources/objets/potion_wis.png', 'Potion de Sagesse', 0, 0, 0, 'Augmente de façon permanente votre sagesse.');");
+        rq.request("INSERT INTO OBJET VALUES(-7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 'ressources/objets/potion_vit.png', 'Potion de Vitalité', 0, 0, 0, 'Augmente de façon permanente votre vitalité.');");
+        rq.request("INSERT INTO OBJET VALUES(-6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'ressources/objets/potion_dex.png', 'Potion de Dextérité', 0, 0, 0, 'Augmente de façon permanente votre dextérité.');");
+        rq.request("INSERT INTO OBJET VALUES(-5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 'ressources/objets/potion_spd.png', 'Potion de Vitesse', 0, 0, 0, 'Augmente de façon permanente votre vitesse.');");
+        rq.request("INSERT INTO OBJET VALUES(-4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 'ressources/objets/potion_def.png', 'Potion de Défense', 0, 0, 0, 'Augmente de façon permanente votre défense.');");
+        rq.request("INSERT INTO OBJET VALUES(-3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 'ressources/objets/potion_atk.png', 'Potion d'Attaque, 0, 0, 0, 'Augmente de façon permanente votre attaque.');");
+        rq.request("INSERT INTO OBJET VALUES(-2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'ressources/objets/potion_mp.png', 'Potion de Mana', 0, 0, 0, 'Augmente de façon permanente votre mana maximale.');");
+        rq.request("INSERT INTO OBJET VALUES(-1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'ressources/objets/potion_hp.png', 'Potion de Vie', 0, 0, 0, 'Augmente de façon permanente votre vie maximale.');");
         rq.request("INSERT INTO OBJET VALUES(0, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, '');");
         rq.request("INSERT INTO OBJET VALUES(1, -1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, '');");
         rq.request("INSERT INTO OBJET VALUES(2, -1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, '');");
