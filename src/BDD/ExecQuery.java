@@ -47,7 +47,7 @@ public class ExecQuery {
         rq.request("INSERT INTO OBJET VALUES(-6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'ressources/objets/potion_dex.png', 'Potion de Dextérité', 0, 0, 0, 'Augmente de façon permanente votre dextérité.');");
         rq.request("INSERT INTO OBJET VALUES(-5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 'ressources/objets/potion_spd.png', 'Potion de Vitesse', 0, 0, 0, 'Augmente de façon permanente votre vitesse.');");
         rq.request("INSERT INTO OBJET VALUES(-4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 'ressources/objets/potion_def.png', 'Potion de Défense', 0, 0, 0, 'Augmente de façon permanente votre défense.');");
-        rq.request("INSERT INTO OBJET VALUES(-3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 'ressources/objets/potion_atk.png', 'Potion d'Attaque, 0, 0, 0, 'Augmente de façon permanente votre attaque.');");
+        rq.request("INSERT INTO OBJET VALUES(-3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 'ressources/objets/potion_atk.png', 'Potion d''Attaque', 0, 0, 0, 'Augmente de façon permanente votre attaque.');");
         rq.request("INSERT INTO OBJET VALUES(-2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'ressources/objets/potion_mp.png', 'Potion de Mana', 0, 0, 0, 'Augmente de façon permanente votre mana maximale.');");
         rq.request("INSERT INTO OBJET VALUES(-1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'ressources/objets/potion_hp.png', 'Potion de Vie', 0, 0, 0, 'Augmente de façon permanente votre vie maximale.');");
         rq.request("INSERT INTO OBJET VALUES(0, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'ressources/equip/noitem.png', 'itemvide', 0, 0, 0, '');");
