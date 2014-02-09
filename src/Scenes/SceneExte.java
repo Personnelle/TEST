@@ -81,6 +81,12 @@ public class SceneExte extends Scene {
             Main.Game.manager.sort();
         }
         
+        if (input.isKeyDown(Input.KEY_ESCAPE)) {
+            setState(STATE.FREEZE_NEXT);
+            Main.Game.manager.getSence("BarreInfo").setState(STATE.FREEZE_NEXT);
+            Main.Game.manager.addSence(new SceneEchap(perso));
+        }
+        
         if (input.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON)) {
             int idArme = perso.tirer(input);
             if (idArme != -1) projPerso.addProjectiles(idArme, input, (perso.getX() + perso.getX1()) / 2, 

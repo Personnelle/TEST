@@ -35,11 +35,9 @@ public class ProjectileList {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProjectileList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Angle de base :"+vBase.getArgument());
         float angleFirstProj = vBase.getArgument() - angleCouvert/2;
         if (angleFirstProj >= 360) angleFirstProj -= 360;
         else if (angleFirstProj < 0) angleFirstProj += 360;
-        System.out.println("Angle first proj :"+angleFirstProj);
         
         float angleEntreProj = 0;
         if (nbProj != 1) angleEntreProj = angleCouvert / (nbProj - 1);
@@ -64,11 +62,9 @@ public class ProjectileList {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProjectileList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Angle de base :"+vBase.getArgument());
         float angleFirstProj = vBase.getArgument() - angleCouvert/2;
         if (angleFirstProj >= 360) angleFirstProj -= 360;
         else if (angleFirstProj < 0) angleFirstProj += 360;
-        System.out.println("Angle first proj :"+angleFirstProj);
         
         float angleEntreProj = 0;
         if (nbProj != 1) angleEntreProj = angleCouvert / (nbProj - 1);
@@ -100,7 +96,6 @@ public class ProjectileList {
     
     public void collisionWithMob(List<Mob> mobs) {
         for (Projectile p : liste) {
-            List<Mob> aSupp = new ArrayList<>();
             for (Mob m : mobs) {
                 if (p.getX() < m.getX1() && p.getX1() > m.getX() && p.getY() < m.getY1() && p.getY1() > m.getY() && p.isActive()) {
                     TYPE t = TYPE.DAMAGE;
@@ -108,9 +103,7 @@ public class ProjectileList {
                     m.perdVie((int) ((Math.random() * 100) % (p.getDegatMax() - p.getDegatMin()) + p.getDegatMin()), t);
                     p.setActive(false);
                 }
-                if (!m.isAlive()) aSupp.add(m);
             }
-            for (Mob m : aSupp) mobs.remove(m);
         }
     }
     

@@ -28,7 +28,7 @@ public class Mob {
     private int def;
     private int spd;
     private int xp;
-    private float fame;
+    private int fame;
     private int rangeMove;
     private long lastTir = 0;
     private TextDegatList textDegats = new TextDegatList();
@@ -51,7 +51,7 @@ public class Mob {
             def = rs.getInt("DEF");
             spd = rs.getInt("SPD");
             xp = rs.getInt("XP");
-            fame = rs.getFloat("FAME");
+            fame = rs.getInt("FAME");
             rangeMove = rs.getInt("RANGEMOVE");
             
             rq.closeDB();
@@ -73,7 +73,7 @@ public class Mob {
     public int getDef() { return def; }
     public int getSpd() { return spd; }
     public int getXp() { return xp; }
-    public float getFame() { return fame; }
+    public int getFame() { return fame; }
     public int getRangeMove() { return rangeMove; }
     public boolean isAlive() { return hp > 0; }
     public TextDegatList getTextDegat() { return textDegats; }

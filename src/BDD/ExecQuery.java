@@ -68,7 +68,7 @@ public class ExecQuery {
         rq.request("CREATE TABLE PROJECTILE(ID NUMBER, IDARME NUMBER, IDMOB NUMBER, DEGATMIN NUMBER, DEGATMAX NUMBER, NBPROJ NUMBER, "
                 + "ANGLE NUMBER, RANGE NUMBER, PERFORANT NUMBER, TRUEDAMAGE NUMBER, SPEED NUMBER, IMG VARCHAR2(60), "
                 + "CONSTRAINT PK_PROJECTILE PRIMARY KEY (ID));");
-        rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 10, 20, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme16.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 50, 60, 24, 360, 500, 0, 0, 20, 'ressources/projectiles/arme16.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (1, 18, -1, 15, 25, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme18.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (2, -1, 0, 10, 20, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/mob0.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (3, -1, 1, 12, 25, 2, 10, 100, 0, 0, 1.2, 'ressources/projectiles/mob1.png');");
@@ -92,8 +92,8 @@ public class ExecQuery {
         rq.request("CREATE TABLE MOB(ID NUMBER, HP NUMBER, DEX NUMBER, ATK NUMBER, DEF NUMBER, SPD NUMBER, XP NUMBER, "
                 + "FAME NUMBER, RANGEMOVE NUMBER, "
                 + "CONSTRAINT PK_MOB PRIMARY KEY (ID));");
-        rq.request("INSERT INTO MOB VALUES(0, 100, 0, 0, 0, 0, 1, 0.1, 5)");
-        rq.request("INSERT INTO MOB VALUES(1, 120, 2, 1, 1, 2, 2, 0.15, 5)");
+        rq.request("INSERT INTO MOB VALUES(0, 100, 0, 0, 0, 0, 1, 1, 5)");
+        rq.request("INSERT INTO MOB VALUES(1, 120, 2, 1, 1, 2, 2, 1, 5)");
         
         rq.request("DROP TABLE SPRITEMOB;");
         rq.request("CREATE TABLE SPRITEMOB(IDMOB NUMBER, IMG VARCHAR2(60), FIRSTX NUMBER, FIRSTH NUMBER, FIRSTW NUMBER, "
@@ -109,7 +109,12 @@ public class ExecQuery {
                 + "CONSTRAINT FK_CORRESPMAP FOREIGN KEY (IDMAP) REFERENCES CARTE(ID), "
                 + "CONSTRAINT FK_CORRESPMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
         rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 30, 30);");
-        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 1, 560, 560);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 560, 560);");
+        
+        rq.request("CREATE TABLE MOBLOOT(IDMOB NUMBER, IDOBJET NUMBER, POURCENT NUMBER, "
+                + "CONSTRAINT FK_MOBLOOT FOREIGN KEY (IDMOB) REFERENCES MOB(ID), "
+                + "CONSTRAINT FK_OBJETLOOT FOREIGN KEY (IDOBJET) REFERENCES OBJET(ID));");
+        rq.request("INSERT INTO MOBLOOT VALUES (0, 18, 0.8);");
         
         rq.closeDB();
     }

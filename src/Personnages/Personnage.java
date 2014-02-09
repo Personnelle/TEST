@@ -251,6 +251,22 @@ public class Personnage {
         txtDegats.add(damage, type, this);
     } 
     
+    public void gainXp(int gainXp) {
+        System.out.println("GAIN XP");
+        if (niveau < 20) {
+            xp += gainXp;
+            if (xp >= xpNeed) {
+                xp -= xpNeed;
+                niveau++;
+                xpNeed = niveau * (niveau + 1);
+            }
+        }
+    }
+    
+    public void gainFame(int gainFame) {
+        if (fame < 99999) fame += gainFame;
+    }
+    
     public int tirer(Input input) {
         //On suppose 1 + 0.dex tir par seconde (avec 50 dex => 1.5 tir par seconde)
         //On aura donc 1000 ms / nbTirParSeconde milliseconde d'écart entre chaque tir

@@ -146,4 +146,11 @@ public class Ctes {
     
     public static final int CARTE_X_POPMOB = 387;
     public static final int CARTE_Y_POPMOB = 287;
+    public static final int CARTE_X_RAMASSER = 200;
+    public static final int CARTE_Y_RAMASSER = MENUBARRE_Y_BARRE - 20;
+    public static final int CARTE_X_CADRELOOT = 200;
+    public static final int CARTE_Y_CADRELOOT = CARTE_Y_RAMASSER - 94;
+    public static final int CARTE_X_LOOTOBJ = CARTE_X_CADRELOOT + 9;
+    public static final int CARTE_Y_LOOTOBJ = CARTE_Y_CADRELOOT + 9;
+    public static final int CARTE_ESP_LOOTOBJ = 42;
 }

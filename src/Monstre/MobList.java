@@ -2,6 +2,7 @@ package Monstre;
 
 import BDD.Requete;
 import Carte.Carte;
+import Objets.SacLoot;
 import Personnages.Personnage;
 import Projectiles.ProjectileList;
 import java.sql.ResultSet;
@@ -16,11 +17,15 @@ public class MobList {
     private List<Mob> listeMob;
     private Carte c;
     private ProjectileList listeProj;
+    private List<SacLoot> listeLoots;
+    private int lootAffich;
     
     public MobList(Carte c) {
         listeMob = new ArrayList<>();
         this.c = c;
         listeProj = new ProjectileList();
+        listeLoots = new ArrayList<>();
+        lootAffich = -1;
     }
     
     public void init() {
@@ -46,24 +51,49 @@ public class MobList {
     public void afficher(Graphics g) {
         for (Mob m : listeMob) m.afficher(g);
         listeProj.afficher(g);
+        for (SacLoot s : listeLoots) s.afficherSacs(g);
+        if (lootAffich != -1) listeLoots.get(lootAffich).afficherLoots(g);
     }
     
     public void deplacer(Personnage p) {
-        testMobDead();
+        testMobDead(p);
         tirer(p);
         for (Mob m : listeMob) m.deplacer(p, c);
         listeProj.deplacer(c.getMurs());
         listeProj.collisionWithPerso(p);
+        setLootAffich(p);
     }
     
-    public void testMobDead() {
+    public void testMobDead(Personnage p) {
         List<Mob> supp = new ArrayList<>();
         
         for (Mob m : listeMob) {
-            if (!m.isAlive()) supp.add(m);
+            if (!m.isAlive()) {
+                supp.add(m);
+                p.gainXp(m.getXp());
+                p.gainFame(m.getFame());
+                listeLoots.add(new SacLoot(m.getId(), m.getX(), m.getY()));
+            }
         }
         
         for (Mob m : supp) listeMob.remove(m);
+    }
+    
+    public void setLootAffich(Personnage p) {
+        lootAffich = -1;
+        
+        List<SacLoot> l = new ArrayList<>();
+        for (SacLoot s : listeLoots) {
+            if (s.isEmpty()) l.add(s);
+        }
+        for (SacLoot s : l) listeLoots.remove(s);
+        
+        int i = 0;
+        for (SacLoot s : listeLoots) {
+            if (p.getX() < s.getX1() && p.getX1() > s.getX() && p.getY() < s.getY1() && p.getY1() > s.getY())
+                lootAffich = i;
+            i++;
+        }
     }
 
     public List<Mob> getListeMob() { return listeMob; }
