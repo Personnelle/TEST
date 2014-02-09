@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.newdawn.slick.Graphics;
 
 public class MobList {
     private List<Mob> listeMob;
@@ -25,7 +26,7 @@ public class MobList {
     public void init() {
         try {
             Requete rq = new Requete();
-            ResultSet rs = rq.select("SELECT IDMOB FROM CORRESPMOBMAP WHERE IDMAP = " +c.getId() + ";");
+            ResultSet rs = rq.select("SELECT * FROM CORRESPMOBMAP WHERE IDMAP = " +c.getId() + ";");
             
             while (rs.next()) listeMob.add(new Mob(rs.getInt("IDMOB"), rs.getFloat("POPX"), rs.getFloat("POPY")));
             
@@ -42,10 +43,17 @@ public class MobList {
         }
     }
     
+    public void afficher(Graphics g) {
+        for (Mob m : listeMob) m.afficher(g);
+        listeProj.afficher(g);
+    }
+    
     public void deplacer(Personnage p) {
         testMobDead();
+        tirer(p);
         for (Mob m : listeMob) m.deplacer(p, c);
         listeProj.deplacer(c.getMurs());
+        listeProj.collisionWithPerso(p);
     }
     
     public void testMobDead() {

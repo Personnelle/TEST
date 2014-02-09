@@ -70,6 +70,8 @@ public class ExecQuery {
                 + "CONSTRAINT PK_PROJECTILE PRIMARY KEY (ID));");
         rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 10, 20, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme16.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (1, 18, -1, 15, 25, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme18.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (2, -1, 0, 10, 20, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/mob0.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (3, -1, 1, 12, 25, 2, 10, 100, 0, 0, 1.2, 'ressources/projectiles/mob1.png');");
         
         rq.request("DROP TABLE INVENTAIRE;");
         rq.request("CREATE TABLE INVENTAIRE(IDPERSO NUMBER, IDOBJET NUMBER, EQUIPE NUMBER, "
@@ -90,6 +92,8 @@ public class ExecQuery {
         rq.request("CREATE TABLE MOB(ID NUMBER, HP NUMBER, DEX NUMBER, ATK NUMBER, DEF NUMBER, SPD NUMBER, XP NUMBER, "
                 + "FAME NUMBER, RANGEMOVE NUMBER, "
                 + "CONSTRAINT PK_MOB PRIMARY KEY (ID));");
+        rq.request("INSERT INTO MOB VALUES(0, 100, 0, 0, 0, 0, 1, 0.1, 5)");
+        rq.request("INSERT INTO MOB VALUES(1, 120, 2, 1, 1, 2, 2, 0.15, 5)");
         
         rq.request("DROP TABLE SPRITEMOB;");
         rq.request("CREATE TABLE SPRITEMOB(IDMOB NUMBER, IMG VARCHAR2(60), FIRSTX NUMBER, FIRSTH NUMBER, FIRSTW NUMBER, "
@@ -97,7 +101,16 @@ public class ExecQuery {
                 + "FOURTHX NUMBER, FOURTHH NUMBER, FOURTHW NUMBER, "
                 + "CONSTRAINT PK_SPRITEMOB PRIMARY KEY (IDMOB), "
                 + "CONSTRAINT FK_SPRITEMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
+        rq.request("INSERT INTO SPRITEMOB VALUES(0, 'ressources/mobs/mob0.png', 0, 25, 25, 25, 25, 25, 50, 25, 25, 75, 25, 25);");
+        rq.request("INSERT INTO SPRITEMOB VALUES(1, 'ressources/mobs/mob1.png', 0, 25, 25, 25, 25, 21, 46, 25, 21, 67, 25, 21);");
 
+        rq.request("DROP TABLE CORRESPMOBMAP;");
+        rq.request("CREATE TABLE CORRESPMOBMAP(IDMAP NUMBER, IDMOB NUMBER, POPX NUMBER, POPY NUMBER, "
+                + "CONSTRAINT FK_CORRESPMAP FOREIGN KEY (IDMAP) REFERENCES CARTE(ID), "
+                + "CONSTRAINT FK_CORRESPMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 30, 30);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 1, 560, 560);");
+        
         rq.closeDB();
     }
 }

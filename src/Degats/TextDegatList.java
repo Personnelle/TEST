@@ -1,6 +1,7 @@
 package Degats;
 
 import Degats.TextDegat.TYPE;
+import Monstre.Mob;
 import Personnages.Personnage;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,10 @@ public class TextDegatList {
     
     public void add(int value, TYPE type, Personnage p) {
         liste.add(new TextDegat(type, value, p));
+    }
+    
+    public void add(int value, TYPE type, Mob m) {
+        liste.add(new TextDegat(type, value, m));
     }
     
     public void affiche(Graphics g) {

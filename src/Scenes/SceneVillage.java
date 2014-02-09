@@ -24,7 +24,6 @@ public class SceneVillage extends Scene {
     private Personnage perso;
     private boolean onBank;
     private long lastFontaine;
-    private TextDegatList textDegat = new TextDegatList();
     private TeleporteurList telep;
     
     public SceneVillage(Personnage p) {
@@ -49,7 +48,6 @@ public class SceneVillage extends Scene {
         g.drawImage(fontaine, Ctes.VILLAGE_X_FONTAINE, Ctes.VILLAGE_Y_FONTAINE);
         g.drawImage(imgBank, Ctes.VILLAGE_X_IMGBANK, Ctes.VILLAGE_Y_IMGBANK);
         perso.afficher(g);
-        textDegat.affiche(g);
         if (onBank) g.drawImage(menuBank, Ctes.VILLAGE_X_MENUBANK, Ctes.VILLAGE_Y_MENUBANK);
     }
     
@@ -62,6 +60,7 @@ public class SceneVillage extends Scene {
         if (id != Ctes.NOMAP_VALUE) {
             Main.Game.manager.addSence(new SceneExte(id, perso));
             Main.Game.manager.removeSence(this);
+            Main.Game.manager.sort();
         }
         if (perso.getX() + perso.getImg().getWidth() > Ctes.VILLAGE_X_IMGBANK && perso.getX() < Ctes.VILLAGE_X_IMGBANK + imgBank.getWidth() && 
                 perso.getY() + perso.getImg().getHeight() > Ctes.VILLAGE_Y_IMGBANK && perso.getY() < Ctes.VILLAGE_Y_IMGBANK + imgBank.getHeight()) {
@@ -84,7 +83,6 @@ public class SceneVillage extends Scene {
                 perso.getY() > Ctes.VILLAGE_Y_FONTAINE && perso.getY() + perso.getImg().getHeight() < Ctes.VILLAGE_Y_FONTAINE + fontaine.getHeight()) {
             if (System.currentTimeMillis() - lastFontaine > 3000) {
                 perso.heal(50);
-                textDegat.add(50, TYPE.HEAL, perso);
                 lastFontaine = System.currentTimeMillis();
             }
         }

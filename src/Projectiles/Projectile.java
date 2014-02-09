@@ -54,8 +54,8 @@ public class Projectile {
             Requete rq = new Requete();
             ResultSet rs = rq.select("SELECT * FROM PROJECTILE WHERE IDARME = " +idArme+ ";");
             
-            degatMin = rs.getInt("DEGATMIN");
-            degatMax = rs.getInt("DEGATMAX");
+            degatMin = rs.getInt("DEGATMIN") + bonusDegat;
+            degatMax = rs.getInt("DEGATMAX") + bonusDegat;
             range = rs.getInt("RANGE");
             perforant = (rs.getInt("PERFORANT") == 1);
             truedamage = (rs.getInt("TRUEDAMAGE") == 1);
@@ -101,8 +101,8 @@ public class Projectile {
             Requete rq = new Requete();
             ResultSet rs = rq.select("SELECT * FROM PROJECTILE WHERE IDMOB = " +idMob+ ";");
             
-            degatMin = rs.getInt("DEGATMIN");
-            degatMax = rs.getInt("DEGATMAX");
+            degatMin = rs.getInt("DEGATMIN") + bonusDegat;
+            degatMax = rs.getInt("DEGATMAX") + bonusDegat;
             range = rs.getInt("RANGE");
             perforant = (rs.getInt("PERFORANT") == 1);
             truedamage = (rs.getInt("TRUEDAMAGE") == 1);
@@ -155,6 +155,8 @@ public class Projectile {
     public boolean isActive() { return active; }
     public int getNbProj() { return nbProj; }
     public float getAngle() { return angle; }
+    
+    public void setActive(boolean active) { this.active = active; }
     
     public void afficher(Graphics g) {
         if (isActive()) g.drawImage(img, x, y);

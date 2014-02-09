@@ -4,6 +4,8 @@ package Monstre;
 import BDD.Requete;
 import Carte.Carte;
 import Carte.Mur;
+import Degats.TextDegat.TYPE;
+import Degats.TextDegatList;
 import Personnages.Personnage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +31,7 @@ public class Mob {
     private float fame;
     private int rangeMove;
     private long lastTir = 0;
+    private TextDegatList textDegats = new TextDegatList();
     
     public Mob(int id, float x, float y) {
         this.id = id;
@@ -73,10 +76,12 @@ public class Mob {
     public float getFame() { return fame; }
     public int getRangeMove() { return rangeMove; }
     public boolean isAlive() { return hp > 0; }
+    public TextDegatList getTextDegat() { return textDegats; }
     
     public void afficher(Graphics g) {
         if (isAlive()) 
             g.drawImage(img, x, y);
+        textDegats.affiche(g);
     }
     
     public void deplacer(Personnage p, Carte c) {
@@ -137,5 +142,14 @@ public class Mob {
             return true;
         }
         return false;
+    }
+    
+    public void perdVie(int degats, TYPE type) {
+        int damage = degats;
+        if (type == TYPE.DAMAGE) damage -= def;
+        if (damage <= 0) damage = 1;
+        if (hp - damage < 0) hp = 0;
+        else hp -= damage;
+        textDegats.add(damage, type, this);
     }
 }

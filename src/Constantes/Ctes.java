@@ -143,4 +143,7 @@ public class Ctes {
     public static final int INFOBULLE_ESP_LIGNES = 20;
     public static final int INFOBULLE_X_DESC = INFOBULLE_X_FOND + 10;
     public static final int INFOBULLE_2X_DESC = 140;
+    
+    public static final int CARTE_X_POPMOB = 387;
+    public static final int CARTE_Y_POPMOB = 287;
 }

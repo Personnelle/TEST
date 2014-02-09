@@ -2,6 +2,8 @@ package Projectiles;
 
 import BDD.Requete;
 import Carte.Mur;
+import Degats.TextDegat.TYPE;
+import Monstre.Mob;
 import Personnages.Personnage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,5 +96,33 @@ public class ProjectileList {
     public void deplacer(List<Mur> murs) {
         suppProj();
         for (Projectile p : liste) p.deplacer(murs);
+    }
+    
+    public void collisionWithMob(List<Mob> mobs) {
+        for (Projectile p : liste) {
+            List<Mob> aSupp = new ArrayList<>();
+            for (Mob m : mobs) {
+                if (p.getX() < m.getX1() && p.getX1() > m.getX() && p.getY() < m.getY1() && p.getY1() > m.getY() && p.isActive()) {
+                    TYPE t = TYPE.DAMAGE;
+                    if (p.isTrueDamage()) t = TYPE.TRUEDAMAGE;
+                    m.perdVie((int) ((Math.random() * 100) % (p.getDegatMax() - p.getDegatMin()) + p.getDegatMin()), t);
+                    p.setActive(false);
+                }
+                if (!m.isAlive()) aSupp.add(m);
+            }
+            for (Mob m : aSupp) mobs.remove(m);
+        }
+    }
+    
+    public void collisionWithPerso(Personnage perso) {
+        for (Projectile p : liste) {
+            if (p.getX() < perso.getX1() && p.getX1() > perso.getX() && p.getY() < perso.getY1() && 
+                    p.getY1() > perso.getY() && p.isActive()) {
+                TYPE t = TYPE.DAMAGE;
+                if (p.isTrueDamage()) t = TYPE.TRUEDAMAGE;
+                perso.perdVie((int) ((Math.random() * 100) % (p.getDegatMax() - p.getDegatMin()) + p.getDegatMin()), t);
+                p.setActive(false);
+            }
+        }
     }
 }

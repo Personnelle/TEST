@@ -4,6 +4,8 @@ import BDD.Requete;
 import Carte.Carte;
 import Carte.Mur;
 import Constantes.Ctes;
+import Degats.TextDegat.TYPE;
+import Degats.TextDegatList;
 import Objets.Equipement;
 import Objets.Inventaire;
 import Objets.Objet;
@@ -33,6 +35,7 @@ public class Personnage {
     private Image img;
     private Inventaire inventaire;
     private long lastTir = 0;
+    private TextDegatList txtDegats = new TextDegatList();
     
     public Personnage(int id, boolean nouveau) throws ClassNotFoundException, SQLException, SlickException {
         if (!nouveau) {
@@ -109,12 +112,15 @@ public class Personnage {
     public Image getImg() { return img; }
     public Inventaire getInventaire() { return inventaire; }
     public long lastTir() { return lastTir; }
+    public TextDegatList getTextDegats() { return txtDegats; }
 
     public void setX(float x) { this.x = x; }
     public void setY(float y) { this.y = y; }
+    public void setVie(int vie) { this.vie = vie; }
     
     public void afficher(Graphics g) {
         g.drawImage(img, x, y);
+        txtDegats.affiche(g);
     }
     
     public void deplacer(Input i, Carte c) {
@@ -233,7 +239,17 @@ public class Personnage {
         vie += gainHp;
         if (vie > statsAct.getHp())
             vie = statsAct.getHp();
+        txtDegats.add(gainHp, TYPE.HEAL, this);
     }
+    
+    public void perdVie(int degats, TYPE type) {
+        int damage = degats;
+        if (type == TYPE.DAMAGE) damage -= statsAct.getDef();
+        if (damage <= 0) damage = 1;
+        if (vie - damage < 0) vie = 0;
+        else vie -= damage;
+        txtDegats.add(damage, type, this);
+    } 
     
     public int tirer(Input input) {
         //On suppose 1 + 0.dex tir par seconde (avec 50 dex => 1.5 tir par seconde)
