@@ -113,8 +113,8 @@ public class ExecQuery {
         rq.request("INSERT INTO OBJET VALUES(60, 13, 4, 1, 35, 0, 0, 7, 2, 0, 5, 0, 'ressources/equip/spell/shield_t13.png', 'Bouclier de saphir renforcé', 12, 7, 90, '');");
         rq.request("INSERT INTO OBJET VALUES(61, 14, 4, 1, 40, 0, 0, 8, 2, 0, 6, 0, 'ressources/equip/spell/shield_t14.png', 'Bouclier sanguin', 14, 8, 95, '');");
         rq.request("INSERT INTO OBJET VALUES(62, 15, 4, 1, 40, 0, 0, 8, 3, 0, 6, 0, 'ressources/equip/spell/shield_t15.png', 'Bouclier sanguin renforcé', 15, 8, 100, '');");
-        rq.request("INSERT INTO OBJET VALUES(63, 1, 3, 1, 0, 0, 1, 1, 1, 1, 1, 1, 'ressources/equip/bagues/ring_t1.png', 'Bague en bronze, 0, 0, 0, '');");
-        rq.request("INSERT INTO OBJET VALUES(64, 2, 3, 1, 0, 0, 2, 1, 2, 2, 2, 2, 'ressources/equip/bagues/ring_t2.png', 'Bague en argent, 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(63, 1, 3, 1, 0, 0, 1, 1, 1, 1, 1, 1, 'ressources/equip/bagues/ring_t1.png', 'Bague en bronze', 0, 0, 0, '');");
+        rq.request("INSERT INTO OBJET VALUES(64, 2, 3, 1, 0, 0, 2, 1, 2, 2, 2, 2, 'ressources/equip/bagues/ring_t2.png', 'Bague en argent', 0, 0, 0, '');");
         rq.request("INSERT INTO OBJET VALUES(65, 3, 3, 1, 0, 0, 3, 2, 3, 3, 3, 3, 'ressources/equip/bagues/ring_t3.png', 'Bague en or', 0, 0, 0, '');");
         rq.request("INSERT INTO OBJET VALUES(66, 4, 3, 1, 5, 5, 4, 2, 4, 4, 4, 4, 'ressources/equip/bagues/ring_t4.png', 'Bague de l''ombre', 0, 0, 0, '');");
         rq.request("INSERT INTO OBJET VALUES(67, 5, 3, 1, 10, 10, 5, 3, 5, 5, 5, 5, 'ressources/equip/bagues/ring_t5.png', 'Bague d''émeraude', 0, 0, 0, '');");
@@ -143,6 +143,7 @@ public class ExecQuery {
         rq.request("INSERT INTO PROJECTILE VALUES (15, 31, -1, 65, 80, 2, 15, 100, 0, 1, 1.7, 'ressources/projectiles/arme31.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (200, -1, 0, 10, 15, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/mob0.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (201, -1, 1, 10, 15, 1, 0, 100, 0, 0, 1, 'ressources/projectiles/mob1.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (202, -1, 2, 10, 15, 1, 0, 100, 0, 0, 1, 'ressources/projectiles/mob2.png');");
         
         rq.request("DROP TABLE INVENTAIRE;");
         rq.request("CREATE TABLE INVENTAIRE(IDPERSO NUMBER, IDOBJET NUMBER, EQUIPE NUMBER, "
@@ -165,6 +166,7 @@ public class ExecQuery {
                 + "CONSTRAINT PK_MOB PRIMARY KEY (ID));");
         rq.request("INSERT INTO MOB VALUES(0, 100, 0, 0, 0, 0, 1, 1, 5)");
         rq.request("INSERT INTO MOB VALUES(1, 120, 2, 1, 1, 2, 2, 1, 5)");
+        rq.request("INSERT INTO MOB VALUES(2, 130, 2, 2, 2, 2, 2, 2, 5)");
         
         rq.request("DROP TABLE SPRITEMOB;");
         rq.request("CREATE TABLE SPRITEMOB(IDMOB NUMBER, IMG VARCHAR2(60), FIRSTX NUMBER, FIRSTH NUMBER, FIRSTW NUMBER, "
@@ -174,13 +176,15 @@ public class ExecQuery {
                 + "CONSTRAINT FK_SPRITEMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
         rq.request("INSERT INTO SPRITEMOB VALUES(0, 'ressources/mobs/mob0.png', 0, 25, 25, 25, 25, 25, 50, 25, 25, 75, 25, 25);");
         rq.request("INSERT INTO SPRITEMOB VALUES(1, 'ressources/mobs/mob1.png', 0, 25, 25, 25, 25, 21, 46, 25, 21, 67, 25, 21);");
-
+        rq.request("INSERT INTO SPRITEMOB VALUES(2, 'ressources/mobs/mob2.png', 0, 25, 19, 19, 25, 19, 38, 25, 19, 57, 25, 19);");
+        
         rq.request("DROP TABLE CORRESPMOBMAP;");
         rq.request("CREATE TABLE CORRESPMOBMAP(IDMAP NUMBER, IDMOB NUMBER, POPX NUMBER, POPY NUMBER, "
                 + "CONSTRAINT FK_CORRESPMAP FOREIGN KEY (IDMAP) REFERENCES CARTE(ID), "
                 + "CONSTRAINT FK_CORRESPMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
         rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 30, 30);");
         rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 560, 560);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 2, 30, 560);");
         
         rq.request("DROP TABLE MOBLOOT;");
         rq.request("CREATE TABLE MOBLOOT(IDMOB NUMBER, IDOBJET NUMBER, POURCENT NUMBER, "

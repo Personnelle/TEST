@@ -254,7 +254,6 @@ public class Personnage {
     } 
     
     public void gainXp(int gainXp) {
-        System.out.println("GAIN XP");
         if (niveau < 20) {
             xp += gainXp;
             if (xp >= xpNeed) {
