@@ -37,6 +37,11 @@ public class Personnage {
     private long lastTir = 0;
     private TextDegatList txtDegats = new TextDegatList();
     private long lastRegen = 0;
+    private boolean buffed = false;
+    private int bonusBuff = 0;
+    private long timeDebutBuff = 0;
+    private long timeBuff = 0;
+    private long lastTick = 0;
     
     public Personnage(int id, boolean nouveau) throws ClassNotFoundException, SQLException, SlickException {
         if (!nouveau) {
@@ -123,6 +128,7 @@ public class Personnage {
         g.drawImage(img, x, y);
         txtDegats.affiche(g);
         regen();
+        majBuff();
     }
     
     public void deplacer(Input i, Carte c) {
@@ -199,6 +205,9 @@ public class Personnage {
         int atk = statsMaxAct.getAtk();
         for (Equipement e : inventaire.getObjetEquip())
             atk += e.getBonusAtk();
+        if (idClass == 3) {
+            if (buffed) atk += bonusBuff;
+        }
         return atk;
     }
     
@@ -206,6 +215,9 @@ public class Personnage {
         int def = statsMaxAct.getDef();
         for (Equipement e : inventaire.getObjetEquip())
             def += e.getBonusDef();
+        if (idClass == 1) {
+            if (buffed) def+= bonusBuff;
+        }
         return def;
     }
     
@@ -220,6 +232,9 @@ public class Personnage {
         int dex = statsMaxAct.getDex();
         for (Equipement e : inventaire.getObjetEquip())
             dex += e.getBonusDex();
+        if (idClass == 2) {
+            if (buffed) dex += bonusBuff;
+        }
         return dex;
     }
     
@@ -304,6 +319,35 @@ public class Personnage {
             mana += statsAct.getWis() / 2;
             if (mana > statsAct.getMp()) mana = statsAct.getMp();
             lastRegen = System.currentTimeMillis();
+        }
+        if (idClass == 4 && buffed) {
+            if (System.currentTimeMillis() - lastTick > 1000) {
+                heal(bonusBuff);
+                lastTick = System.currentTimeMillis();
+            }
+        }
+    }
+    
+    public void useSkill() {
+        if (inventaire.getObjetEquip().get(3).getNiveau() != -1) {
+            if (mana >= inventaire.getObjetEquip().get(3).getCoutMana()) {
+                buffed = true;
+                bonusBuff = inventaire.getObjetEquip().get(3).getBonusSort();
+                timeDebutBuff = System.currentTimeMillis();
+                timeBuff = inventaire.getObjetEquip().get(3).getDureeSort();
+                statsAct.calcul(this);
+            }
+        }
+    }
+    
+    public void majBuff() {
+        if (buffed) {
+            if (System.currentTimeMillis() - timeDebutBuff > timeBuff) {
+                buffed = false;
+                bonusBuff = 0;
+                timeBuff = 0;
+                timeDebutBuff = System.currentTimeMillis();
+            }
         }
     }
 }

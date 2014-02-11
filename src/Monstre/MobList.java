@@ -86,7 +86,7 @@ public class MobList {
                 supp.add(m);
                 p.gainXp(m.getXp());
                 p.gainFame(m.getFame());
-                listeLoots.add(new SacLoot(m.getId(), m.getX(), m.getY()));
+                listeLoots.add(new SacLoot(m.getId(), m.getX(), m.getY(), p.getIdClass()));
             }
         }
         

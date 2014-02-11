@@ -43,7 +43,7 @@ public class SceneExte extends Scene {
     @Override
     protected void CustomRender(GameContainer gc, Graphics g) throws SlickException {
         c.afficher(g);
-        if (!fight) telep.affiche(g);
+        if (!fight || (fight && mobliste.isFinish())) telep.affiche(g);
         g.drawImage(popMob, Ctes.CARTE_X_POPMOB, Ctes.CARTE_Y_POPMOB);
         perso.afficher(g);
         mobliste.afficher(g);
@@ -56,11 +56,13 @@ public class SceneExte extends Scene {
         Input input = gc.getInput();
         
         perso.deplacer(input, c);
-        int id = telep.collision(perso);
-        if (id != Ctes.NOMAP_VALUE) {
-            Main.Game.manager.addSence(new SceneExte(id, perso));
-            Main.Game.manager.removeSence(this);
-            Main.Game.manager.sort();
+        if (!fight || (fight && mobliste.isFinish())) {
+            int id = telep.collision(perso);
+            if (id != Ctes.NOMAP_VALUE) {
+                Main.Game.manager.addSence(new SceneExte(id, perso));
+                Main.Game.manager.removeSence(this);
+                Main.Game.manager.sort();
+            }
         }
         
         mobliste.deplacer(perso);
@@ -91,6 +93,10 @@ public class SceneExte extends Scene {
             Main.Game.manager.addSence(new SceneVillage(perso));
             Main.Game.manager.removeSence(this);
             Main.Game.manager.sort();
+        }
+        
+        if (input.isKeyPressed(Input.KEY_SPACE)) {
+            perso.useSkill();
         }
         
         if (input.isKeyDown(Input.KEY_ESCAPE)) {

@@ -18,6 +18,18 @@ public class ExecQuery {
         rq.request("INSERT INTO MUR VALUES (1, -1, 0, 548, 'ressources/mur/bas.png');");
         rq.request("INSERT INTO MUR VALUES (2, -1, 0, 0, 'ressources/mur/gauche.png');");
         rq.request("INSERT INTO MUR VALUES (3, -1, 798, 0, 'ressources/mur/droite.png');");
+        rq.request("INSERT INTO MUR VALUES (4, 0, 0, 0, 'ressources/mur/haut.png');");
+        rq.request("INSERT INTO MUR VALUES (5, 0, 0, 548, 'ressources/mur/bas.png');");
+        rq.request("INSERT INTO MUR VALUES (6, 0, 0, 0, 'ressources/mur/gauche.png');");
+        rq.request("INSERT INTO MUR VALUES (7, 0, 798, 0, 'ressources/mur/droite.png');");
+        rq.request("INSERT INTO MUR VALUES (8, 1, 0, 0, 'ressources/mur/haut.png');");
+        rq.request("INSERT INTO MUR VALUES (9, 1, 0, 548, 'ressources/mur/bas.png');");
+        rq.request("INSERT INTO MUR VALUES (10, 1, 0, 0, 'ressources/mur/gauche.png');");
+        rq.request("INSERT INTO MUR VALUES (11, 1, 798, 0, 'ressources/mur/droite.png');");
+        rq.request("INSERT INTO MUR VALUES (12, 2, 0, 0, 'ressources/mur/haut.png');");
+        rq.request("INSERT INTO MUR VALUES (13, 2, 0, 548, 'ressources/mur/bas.png');");
+        rq.request("INSERT INTO MUR VALUES (14, 2, 0, 0, 'ressources/mur/gauche.png');");
+        rq.request("INSERT INTO MUR VALUES (15, 2, 798, 0, 'ressources/mur/droite.png');");
         
         rq.request("DROP TABLE INFOCLASS;");
         rq.request("CREATE TABLE INFOCLASS(IDCLASS NUMBER, HP NUMBER, MP NUMBER, ATK NUMBER, DEF NUMBER, SPD NUMBER, "
@@ -31,6 +43,8 @@ public class ExecQuery {
         rq.request("CREATE TABLE CARTE(ID NUMBER, IMG VARCHAR2(50), CONSTRAINT PK_CARTE PRIMARY KEY (ID));");
         rq.request("INSERT INTO CARTE VALUES(-1, 'ressources/carte/village.png');");
         rq.request("INSERT INTO CARTE VALUES(0, 'ressources/carte/carte0.png');");
+        rq.request("INSERT INTO CARTE VALUES(1, 'ressources/carte/carte1.png');");
+        rq.request("INSERT INTO CARTE VALUES(2, 'ressources/carte/carte2.png');");
         
         rq.request("DROP TABLE PERSONNAGE;");
         rq.request("CREATE TABLE PERSONNAGE(ID NUMBER, IDCLASS NUMBER, NIVEAU NUMBER, XP NUMBER, FAME NUMBER, HP NUMBER, MP NUMBER, ATK NUMBER, "
@@ -125,7 +139,8 @@ public class ExecQuery {
         rq.request("CREATE TABLE PROJECTILE(ID NUMBER, IDARME NUMBER, IDMOB NUMBER, DEGATMIN NUMBER, DEGATMAX NUMBER, NBPROJ NUMBER, "
                 + "ANGLE NUMBER, RANGE NUMBER, PERFORANT NUMBER, TRUEDAMAGE NUMBER, SPEED NUMBER, IMG VARCHAR2(60), "
                 + "CONSTRAINT PK_PROJECTILE PRIMARY KEY (ID));");
-        rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 10, 15, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme16.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 50, 60, 36, 360, 500, 0, 0, 1, 'ressources/projectiles/arme16.png');");
+        //rq.request("INSERT INTO PROJECTILE VALUES (0, 16, -1, 10, 15, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme16.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (1, 17, -1, 12, 17, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/arme17.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (2, 18, -1, 15, 20, 1, 0, 50, 0, 0, 1.1, 'ressources/projectiles/arme18.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (3, 19, -1, 18, 25, 1, 0, 50, 0, 0, 1.1, 'ressources/projectiles/arme19.png');");
@@ -144,6 +159,7 @@ public class ExecQuery {
         rq.request("INSERT INTO PROJECTILE VALUES (200, -1, 0, 10, 15, 1, 0, 50, 0, 0, 1, 'ressources/projectiles/mob0.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (201, -1, 1, 10, 15, 1, 0, 100, 0, 0, 1, 'ressources/projectiles/mob1.png');");
         rq.request("INSERT INTO PROJECTILE VALUES (202, -1, 2, 10, 15, 1, 0, 100, 0, 0, 1, 'ressources/projectiles/mob2.png');");
+        rq.request("INSERT INTO PROJECTILE VALUES (203, -1, 3, 12, 17, 1, 0, 400, 0, 0, 1, 'ressources/projectiles/mob3.png');");
         
         rq.request("DROP TABLE INVENTAIRE;");
         rq.request("CREATE TABLE INVENTAIRE(IDPERSO NUMBER, IDOBJET NUMBER, EQUIPE NUMBER, "
@@ -159,6 +175,10 @@ public class ExecQuery {
         rq.request("CREATE TABLE TELEPORTEUR(ID NUMBER, IDMAP NUMBER, X NUMBER, Y NUMBER, IDMAPDEST NUMBER, XDEST NUMBER, YDEST NUMBER, "
                 + "CONSTRAINT PK_TELEPORTEUR PRIMARY KEY (ID));");
         rq.request("INSERT INTO TELEPORTEUR VALUES (0, -1, 500, 500, 0, 500, 500);");
+        rq.request("INSERT INTO TELEPORTEUR VALUES (1, 0, 8, 270, 1, 731, 270);");
+        rq.request("INSERT INTO TELEPORTEUR VALUES (2, 0, 380, 8, 2, 380, 481);");
+        rq.request("INSERT INTO TELEPORTEUR VALUES (3, 1, 761, 270, 0, 44, 270);");
+        rq.request("INSERT INTO TELEPORTEUR VALUES (4, 2, 380, 511, 0, 380, 44);");
         
         rq.request("DROP TABLE MOB;");
         rq.request("CREATE TABLE MOB(ID NUMBER, HP NUMBER, DEX NUMBER, ATK NUMBER, DEF NUMBER, SPD NUMBER, XP NUMBER, "
@@ -167,6 +187,7 @@ public class ExecQuery {
         rq.request("INSERT INTO MOB VALUES(0, 100, 0, 0, 0, 0, 1, 1, 5)");
         rq.request("INSERT INTO MOB VALUES(1, 120, 2, 1, 1, 2, 2, 1, 5)");
         rq.request("INSERT INTO MOB VALUES(2, 130, 2, 2, 2, 2, 2, 2, 5)");
+        rq.request("INSERT INTO MOB VALUES(3, 120, 4, 4, 0, 0, 2, 2, 300)");
         
         rq.request("DROP TABLE SPRITEMOB;");
         rq.request("CREATE TABLE SPRITEMOB(IDMOB NUMBER, IMG VARCHAR2(60), FIRSTX NUMBER, FIRSTH NUMBER, FIRSTW NUMBER, "
@@ -177,14 +198,16 @@ public class ExecQuery {
         rq.request("INSERT INTO SPRITEMOB VALUES(0, 'ressources/mobs/mob0.png', 0, 25, 25, 25, 25, 25, 50, 25, 25, 75, 25, 25);");
         rq.request("INSERT INTO SPRITEMOB VALUES(1, 'ressources/mobs/mob1.png', 0, 25, 25, 25, 25, 21, 46, 25, 21, 67, 25, 21);");
         rq.request("INSERT INTO SPRITEMOB VALUES(2, 'ressources/mobs/mob2.png', 0, 25, 19, 19, 25, 19, 38, 25, 19, 57, 25, 19);");
+        rq.request("INSERT INTO SPRITEMOB VALUES(3, 'ressources/mobs/mob3.png', 0, 25, 25, 25, 25, 22, 47, 25, 22, 69, 25, 25);");
         
         rq.request("DROP TABLE CORRESPMOBMAP;");
         rq.request("CREATE TABLE CORRESPMOBMAP(IDMAP NUMBER, IDMOB NUMBER, POPX NUMBER, POPY NUMBER, "
                 + "CONSTRAINT FK_CORRESPMAP FOREIGN KEY (IDMAP) REFERENCES CARTE(ID), "
                 + "CONSTRAINT FK_CORRESPMOB FOREIGN KEY (IDMOB) REFERENCES MOB(ID));");
         rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 30, 30);");
-        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 560, 560);");
-        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 2, 30, 560);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 0, 520, 520);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 2, 30, 520);");
+        rq.request("INSERT INTO CORRESPMOBMAP VALUES(0, 3, 520, 30);");
         
         rq.request("DROP TABLE MOBLOOT;");
         rq.request("CREATE TABLE MOBLOOT(IDMOB NUMBER, IDOBJET NUMBER, POURCENT NUMBER, "

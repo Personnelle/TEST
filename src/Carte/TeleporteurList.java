@@ -32,7 +32,7 @@ public class TeleporteurList {
     
     public int collision(Personnage p) {
         for (Teleporteur t : liste) {
-            if (p.getX() < t.getX1() && p.getX() + p.getX1() > t.getX() && p.getY() < t.getY1() && p.getY1() > t.getY()) {
+            if (p.getX() < t.getX1() && p.getX1() > t.getX() && p.getY() < t.getY1() && p.getY1() > t.getY()) {
                 p.setX(t.getxDest());
                 p.setY(t.getyDest());
                 return t.getIdMapDest();

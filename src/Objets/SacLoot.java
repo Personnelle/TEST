@@ -20,7 +20,7 @@ public class SacLoot {
     private Image ramasser;
     private Image cadre;
     
-    public SacLoot(int idMob, float x, float y) {
+    public SacLoot(int idMob, float x, float y, int idClass) {
         this.x = x;
         this.y = y;
         
@@ -31,8 +31,10 @@ public class SacLoot {
             while (rs.next()) {
                 double rd = Math.random();
                 if (rd < rs.getDouble("POURCENT")) {
-                    if (rs.getInt("IDOBJET") >= 0)
-                        liste.add(new Equipement(rs.getInt("IDOBJET")));
+                    if ((rs.getInt("IDOBJET")) >= 0) {
+                        if (testAdd(rs.getInt("IDOBJET"), idClass))
+                                liste.add(new Equipement(rs.getInt("IDOBJET")));
+                    }
                     else liste.add(new Objet(rs.getInt("IDOBJET")));
                 }
             }
@@ -72,5 +74,14 @@ public class SacLoot {
                 j = 1;
             }
         }
+    }
+    
+    public boolean testAdd(int idObj, int idClass) throws ClassNotFoundException, SQLException {
+        Requete rq = new Requete();
+        ResultSet rs = rq.select("SELECT TYPE, IDCLASS FROM OBJET WHERE ID = " +idObj+ ";");
+        
+        boolean b = (rs.getInt("TYPE") == 3 || rs.getInt("IDCLASS") == idClass);
+        rq.closeDB();
+        return b;
     }
 }
